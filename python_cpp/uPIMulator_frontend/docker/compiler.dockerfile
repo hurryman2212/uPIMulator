@@ -5,7 +5,14 @@ ENV PYTHONPATH="/root/upmem_linker/src:$PYTHONPATH"
 
 RUN chmod 1777 /tmp
 
+# Python 3.8
 RUN apt update
+RUN apt upgrade -y
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt install -y python3.8
+RUN apt install -y python3-pip
+
 RUN apt install -y git
 RUN apt install -y wget
 RUN apt install -y vim
@@ -18,14 +25,6 @@ RUN apt install -y libnuma-dev
 RUN apt install -y libelf-dev
 RUN apt install -y flex
 
-# Python 3.10
-RUN apt update
-RUN apt upgrade -y
-RUN apt install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt install -y python3.10
-RUN apt install -y python3-pip
-
 # UPMEM LLVM
 WORKDIR /root
 RUN git clone https://github.com/upmem/llvm-project.git
@@ -36,8 +35,8 @@ RUN cmake build .
 
 # UPMEM SDK
 WORKDIR /root
-RUN wget sdk-releases.upmem.com/2021.3.0/ubuntu_20.04/upmem-2021.3.0-Linux-x86_64.tar.gz
-RUN tar -zxvf upmem-2021.3.0-Linux-x86_64.tar.gz
-RUN echo "source /root/upmem-2021.3.0-Linux-x86_64/upmem_env.sh" > /root/.bashrc
+RUN wget https://github.com/kagandikmen/upmem-sdk/raw/refs/heads/master/2023.1.0/upmem-2023.1.0-Linux-x86_64.tar.gz
+RUN tar -zxvf upmem-2023.1.0-Linux-x86_64.tar.gz
+RUN echo "source /root/upmem-2023.1.0-Linux-x86_64/upmem_env.sh" > /root/.bashrc
 
 WORKDIR /root/upmem_compiler

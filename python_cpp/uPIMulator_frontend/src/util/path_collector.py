@@ -77,4 +77,4 @@ class PathCollector:
 
     @staticmethod
     def upmem_sdk_path_in_docker() -> str:
-        return "/root/upmem-2021.3.0-Linux-x86_64"
+        return "/root/upmem-2023.1.0-Linux-x86_64"
